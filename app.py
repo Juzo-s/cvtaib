@@ -18,7 +18,12 @@ st.markdown(CSS, unsafe_allow_html=True)
 
 NAME = "Mohamed Taïb SBIHI"
 TITLE = "Bachelor Marketing Digital & Data — 3ème année"
-GOAL = "Étudiant en marketing digital orienté data, analyse de performance et outils digitaux."
+SUMMARY = (
+    "Étudiant en Marketing Digital & Data, je m’intéresse à l’analyse de données appliquée au marketing, "
+    "à l’optimisation de la performance (acquisition, conversion, rétention) et aux outils digitaux. "
+    "J’aime construire des supports clairs (reporting, dashboards, contenus) et exécuter des projets concrets."
+)
+
 CITY = "Paris / Île-de-France"
 PHONE = "+33 7 66 10 58 56"
 EMAIL = "taibsbihi1@gmail.com"
@@ -51,8 +56,8 @@ EXPERIENCES = [
         "when": "01/06/2023 → 01/08/2023",
         "points": [
             "Gestion des réseaux sociaux (Instagram)",
-            "Participation à la coordination d’événements promotionnels",
-            "Conception et mise en œuvre de l’évènement estival du centre commercial",
+            "Participation à la coordination d’événements promotionnels pour augmenter la fréquentation du centre",
+            "Conception et mise en œuvre de l’ensemble de l’évènement estival du centre commercial",
         ],
         "tags": ["Événementiel", "Instagram", "Coordination"],
     },
@@ -61,7 +66,7 @@ EXPERIENCES = [
         "org": "Fnac",
         "when": "Avril 2018 (1 semaine)",
         "points": [
-            "Aide à la vente et conseil client en magasin",
+            "Aide à la vente en magasin (conseils aux clients, accompagnement)",
         ],
         "tags": ["Vente", "Relation client"],
     },
@@ -72,21 +77,21 @@ PROJECTS = [
         "name": "Favorite Skin Picker",
         "type": "Projet personnel",
         "when": "2023 → 2024",
-        "desc": "Site interactif permettant de sélectionner un personnage League of Legends à partir d’une base dynamique, avec génération de scripts assistée par IA.",
+        "desc": "Site interactif : sélection d’un personnage League of Legends depuis une base dynamique, avec des ramifications personnalisées, en s’appuyant sur l’IA pour générer des scripts (JS/HTML).",
         "stack": ["JavaScript", "HTML", "CSS", "IA"],
     },
     {
         "name": "Analyse d’un jeu de données avec l’IA",
         "type": "Projet académique",
         "when": "1ère année",
-        "desc": "Exploration et analyse d’un dataset avec une approche assistée par intelligence artificielle.",
+        "desc": "Exploration et analyse d’un dataset avec une approche assistée par IA (nettoyage, interprétation, restitution).",
         "stack": ["Analyse", "Data", "IA"],
     },
     {
         "name": "Stratégie marketing — méthode AARRR",
         "type": "Projet académique",
-        "when": "2ème année",
-        "desc": "Construction d’une stratégie marketing basée sur le framework AARRR.",
+        "when": "2ème année (2023–2024)",
+        "desc": "Élaboration d’une stratégie marketing structurée via le framework AARRR (Acquisition, Activation, Rétention, Revenu, Recommandation).",
         "stack": ["Marketing", "AARRR", "Stratégie"],
     },
 ]
@@ -95,7 +100,135 @@ EDU = [
     {
         "school": "EFREI PARIS",
         "degree": "Bachelor en Ingénierie Marketing Digital",
-        "details": "Data science, data analyse, data visualisation, IA, marketing digital, SEO/SEA",
+        "details": "Data science, data analyse, data visualisation, data marketing, IA, neurosciences, développement informatique, marketing digital, E-business, SEO/SEA",
     },
     {
-        "
+        "school": "Université Paris 1 Panthéon-Sorbonne",
+        "degree": "Licence 1 — Économie",
+        "details": "Mathématiques appliquées à l’économie, statistiques",
+    },
+    {
+        "school": "Collège-Lycée Léon l’Africain (Casablanca)",
+        "degree": "Baccalauréat Général AEFE",
+        "details": "Spécialités Mathématiques et Physique-chimie",
+    },
+]
+
+# --- Header ---
+left, right = st.columns([2.6, 1.4], vertical_alignment="center")
+with left:
+    st.title(NAME)
+    st.markdown(f"**{TITLE}**")
+    st.markdown(f"<div class='small'>{SUMMARY}</div>", unsafe_allow_html=True)
+with right:
+    st.markdown(
+        f"""
+        <div class="kpi">
+            <div><b>📍</b> {CITY}</div>
+            <div><b>✉️</b> {EMAIL}</div>
+            <div><b>📞</b> {PHONE}</div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+st.markdown("<hr/>", unsafe_allow_html=True)
+
+# --- Sidebar navigation ---
+pages = ["Profil", "Expériences", "Projets", "Compétences", "Formation", "Langues"]
+page = st.sidebar.radio("Navigation", pages)
+
+if page == "Profil":
+    st.header("Profil")
+    st.markdown(f"<div class='card'>{SUMMARY}</div>", unsafe_allow_html=True)
+    st.write("")
+    st.markdown(
+        """
+        <div class="card">
+            <b>🎯 Cible</b><br/>
+            Marketing digital / Data marketing
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+elif page == "Expériences":
+    st.header("Expériences")
+    for exp in EXPERIENCES:
+        st.markdown(
+            f"""
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                    <div>
+                        <div style="font-size:1.08rem;"><b>{exp["role"]}</b></div>
+                        <div class="small">{exp["org"]}</div>
+                    </div>
+                    <div class="small" style="white-space:nowrap;">{exp["when"]}</div>
+                </div>
+                <div style="margin-top:10px;">
+                    {"".join([f"<div>• {p}</div>" for p in exp["points"]])}
+                </div>
+                <div style="margin-top:10px;">
+                    {"".join([f"<span class='tag'>{t}</span>" for t in exp.get("tags", [])])}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.write("")
+
+elif page == "Projets":
+    st.header("Projets")
+    filt = st.multiselect("Filtrer par mot-clé", sorted({t for p in PROJECTS for t in p["stack"]}))
+    for p in PROJECTS:
+        if filt and not set(filt).intersection(set(p["stack"])):
+            continue
+        st.markdown(
+            f"""
+            <div class="card">
+                <div style="display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+                    <div>
+                        <div style="font-size:1.08rem;"><b>{p["name"]}</b> <span class="small">• {p["type"]}</span></div>
+                        <div class="small">{p["when"]}</div>
+                    </div>
+                </div>
+                <div style="margin-top:10px;">{p["desc"]}</div>
+                <div style="margin-top:10px;">
+                    {"".join([f"<span class='tag'>{t}</span>" for t in p["stack"]])}
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.write("")
+
+elif page == "Compétences":
+    st.header("Compétences")
+    for cat, items in SKILLS.items():
+        st.markdown(f"### {cat}")
+        st.markdown("".join([f"<span class='tag'>{x}</span>" for x in items]), unsafe_allow_html=True)
+        st.write("")
+    st.markdown("### Soft skills")
+    st.markdown("".join([f"<span class='tag'>{x}</span>" for x in SOFT]), unsafe_allow_html=True)
+
+elif page == "Formation":
+    st.header("Formation")
+    for e in EDU:
+        st.markdown(
+            f"""
+            <div class="card">
+                <div style="font-size:1.06rem;"><b>{e["degree"]}</b></div>
+                <div class="small">{e["school"]}</div>
+                <div style="margin-top:10px;" class="small">{e["details"]}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+        st.write("")
+
+elif page == "Langues":
+    st.header("Langues")
+    st.markdown('<div class="card">', unsafe_allow_html=True)
+    for lang, lvl in LANGS:
+        st.markdown(f"**{lang}** — {lvl}")
+    st.markdown("</div>", unsafe_allow_html=True)
